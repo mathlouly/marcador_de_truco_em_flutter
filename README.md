@@ -1,6 +1,6 @@
 # marcador_de_truco
 
-A new Flutter project.
+Projeto para marcar pontos no truco feito utilizando Flutter
 
 ## Getting Started
 
