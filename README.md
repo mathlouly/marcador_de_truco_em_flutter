@@ -6,6 +6,7 @@ Projeto para marcar pontos no truco utilizando Flutter
 
 Esse projeto foi criado utilizando flutter. É um projeto simples para quem está começando a aprender porém é de grande valia no seu conhecimento
  
+ 
 ###### Link para baixar o aplicativo
 - [App Google Play](#)
 
