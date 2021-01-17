@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:marcador_de_truco/home.dart';
+import 'package:marcador_de_truco/screens/home_page.dart';
+import 'package:marcador_de_truco/screens/marcador_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,9 +10,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Marcador de Truco Goiano',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: HomePage(),
     );

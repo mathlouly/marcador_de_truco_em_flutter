@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marcador_de_truco/widgets/config-partida.dart';
+import 'package:marcador_de_truco/widgets/config_partida.dart';
 
 class HomePage extends StatefulWidget {
   @override
