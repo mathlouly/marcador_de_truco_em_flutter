@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Contador extends StatefulWidget {
-  Contador({Key key, @required this.nameTeam, @required this.quantPontos}) : super(key: key);
+  Contador({Key key, @required this.nameTeam, @required this.quantPontos, @required this.corTeam}) : super(key: key);
 
   final String nameTeam;
   final int quantPontos;
+  final Color corTeam;
   @override
   _ContadorState createState() => _ContadorState();
 }
@@ -14,34 +15,39 @@ class _ContadorState extends State<Contador> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey[800].withOpacity(0.3),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+        margin: EdgeInsets.symmetric(horizontal: 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
               alignment: Alignment.center,
-              padding: EdgeInsets.only(bottom: 10),
+              padding: EdgeInsets.only(bottom: 15),
               child: Text(
-                widget.nameTeam,
+                widget.nameTeam.toUpperCase(),
                 style: TextStyle(
-                  color: Colors.white,
+                  color: widget.corTeam,
                   decoration: TextDecoration.none,
-                  fontSize: 25,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w900,
                 ),
               ),
             ),
             Container(
               height: 150,
-              color: Colors.white,
+              color: Colors.transparent,
               child: Center(
                 child: Text(
                   value.toString(),
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                     decoration: TextDecoration.none,
-                    fontWeight: FontWeight.w100,
-                    fontSize: 70,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 80,
                   ),
                 ),
               ),
@@ -52,8 +58,8 @@ class _ContadorState extends State<Contador> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                buttonContador("+", 1, Colors.white, Colors.black, () => setState(() => value += 1)),
-                buttonContador("+", 3, Colors.white, Colors.red[900], () => setState(() => value += 3)),
+                buttonContador("+", 1, Colors.white, Colors.green, () => setState(() => value += 1)),
+                buttonContador("+", 3, Colors.white, Colors.green, () => setState(() => value += 3)),
               ],
             ),
             SizedBox(
@@ -62,8 +68,8 @@ class _ContadorState extends State<Contador> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                buttonContador("-", 1, Colors.white, Colors.black, () => setState(() => value > 0 ? value -= 1 : null)),
-                buttonContador("-", 3, Colors.white, Colors.red[900], () {
+                buttonContador("-", 1, Colors.white, Colors.red, () => setState(() => value > 0 ? value -= 1 : null)),
+                buttonContador("-", 3, Colors.white, Colors.red, () {
                   setState(() {
                     if (value > 0) {
                       if (value > 1) {
@@ -100,7 +106,7 @@ class _ContadorState extends State<Contador> {
           child: Center(
             child: Text(
               "$sinal" + valor.toString(),
-              style: TextStyle(fontSize: 35, color: fontColor),
+              style: TextStyle(fontSize: 25, color: fontColor),
             ),
           ),
         ),

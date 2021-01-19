@@ -13,15 +13,15 @@ Widget configPartida(BuildContext context) {
         heightFactor: MediaQuery.of(context).viewInsets.bottom > 200
             ? MediaQuery.of(context).viewInsets.bottom < 250
                 ? 0.9
-                : 1
-            : 0.6,
+                : 1.1
+            : 0.65,
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Padding(
-                padding: const EdgeInsets.only(bottom: 10),
+                padding: EdgeInsets.only(bottom: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -31,19 +31,6 @@ Widget configPartida(BuildContext context) {
                         child: Text(
                           "Configurar Partida",
                           style: TextStyle(fontSize: 25),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      child: TextButton(
-                        style: ButtonStyle(
-                          overlayColor: MaterialStateProperty.all(Colors.black38),
-                          backgroundColor: MaterialStateProperty.all(Colors.red),
-                        ),
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: Icon(
-                          Icons.close,
-                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -57,9 +44,11 @@ Widget configPartida(BuildContext context) {
                   labelText: "Time 1",
                   border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
                 ),
+                maxLength: 10,
+                maxLines: 1,
               ),
               SizedBox(
-                height: 10,
+                height: 5,
               ),
               TextFormField(
                 controller: teamTwo,
@@ -68,9 +57,11 @@ Widget configPartida(BuildContext context) {
                   labelText: "Time 2",
                   border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
                 ),
+                maxLength: 10,
+                maxLines: 1,
               ),
               SizedBox(
-                height: 20,
+                height: 0,
               ),
               Container(
                 child: Center(
@@ -90,7 +81,7 @@ Widget configPartida(BuildContext context) {
                     },
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      labelText: 'Número de pontos',
+                      labelText: 'Quantidade de pontos',
                       fillColor: Colors.orange,
                     ),
                   ),
@@ -106,11 +97,33 @@ Widget configPartida(BuildContext context) {
                 ),
                 child: Text(
                   'Começar',
-                  style: TextStyle(color: Colors.white, fontSize: 30),
+                  style: TextStyle(color: Colors.white, fontSize: 25),
                 ),
                 onPressed: () {
-                  if (int.parse(numberRound.text) > 0 && teamOne.text.length > 0 && teamTwo.text.length > 0)
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => MarcadorPage(int.parse(numberRound.text), teamOne.text, teamTwo.text)));
+                  if (numberRound.text.length > 0 && teamOne.text.length > 0 && teamTwo.text.length > 0)
+                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => MarcadorPage(int.parse(numberRound.text), teamOne.text, teamTwo.text)), (route) => false);
+                  //Navigator.of(context).push(MaterialPageRoute(builder: (context) => MarcadorPage(int.parse(numberRound.text), teamOne.text, teamTwo.text)));
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextButton(
+                style: ButtonStyle(
+                  overlayColor: MaterialStateProperty.all(Colors.black38),
+                  backgroundColor: MaterialStateProperty.all(Colors.white),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero,
+                      side: BorderSide(
+                        color: Colors.black,
+                      ))),
+                ),
+                child: Text(
+                  'Cancelar',
+                  style: TextStyle(color: Colors.black, fontSize: 25),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
                 },
               ),
             ],

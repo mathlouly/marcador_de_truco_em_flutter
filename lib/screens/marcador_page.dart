@@ -10,14 +10,15 @@ class MarcadorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage('assets/fundo.png'), fit: BoxFit.fill),
-      ),
+      color: Colors.grey[900],
+      //decoration: BoxDecoration(
+      //  image: DecorationImage(image: AssetImage('assets/fundo.png'), fit: BoxFit.fill),
+      //),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 100),
+            padding: EdgeInsets.only(top: 100, bottom: 50),
             child: FractionallySizedBox(
               widthFactor: 0.7,
               child: Container(
@@ -25,10 +26,10 @@ class MarcadorPage extends StatelessWidget {
                   color: Colors.red,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black,
-                      blurRadius: 1,
+                      color: Colors.red[900],
+                      blurRadius: 5,
                       spreadRadius: 0.5,
-                      offset: Offset(-3, 3),
+                      offset: Offset(0, 0),
                     )
                   ],
                 ),
@@ -49,10 +50,12 @@ class MarcadorPage extends StatelessWidget {
                 Contador(
                   nameTeam: nameTeamOne,
                   quantPontos: quantPontos,
+                  corTeam: Colors.white,
                 ),
                 Contador(
                   nameTeam: nameTeamTwo,
                   quantPontos: quantPontos,
+                  corTeam: Colors.white,
                 ),
               ],
             ),
