@@ -1,13 +1,14 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:marcador_de_truco/widgets/contador.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class MarcadorPage extends StatelessWidget {
   final int quantPontos;
   final String nameTeamOne;
   final String nameTeamTwo;
 
-  MarcadorPage(this.quantPontos, this.nameTeamOne, this.nameTeamTwo);
+  MarcadorPage({@required this.quantPontos, @required this.nameTeamOne, @required this.nameTeamTwo});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +60,7 @@ class MarcadorPage extends StatelessWidget {
               ],
             ),
           ),
-          AdmobBanner(adUnitId: 'ca-app-pub-5225090572765616/9741816970', adSize: AdmobBannerSize.FULL_BANNER),
+          AdmobBanner(adUnitId: env['CaAppPub'], adSize: AdmobBannerSize.FULL_BANNER),
         ],
       ),
     );

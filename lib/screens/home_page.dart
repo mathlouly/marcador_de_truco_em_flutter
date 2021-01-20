@@ -1,6 +1,7 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:marcador_de_truco/widgets/config_partida.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -59,7 +60,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          AdmobBanner(adUnitId: 'ca-app-pub-5225090572765616/9741816970', adSize: AdmobBannerSize.FULL_BANNER),
+          AdmobBanner(adUnitId: env['CaAppPub'], adSize: AdmobBannerSize.FULL_BANNER),
         ],
       ),
     );

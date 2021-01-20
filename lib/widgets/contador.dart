@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:marcador_de_truco/stream/contador_stream.dart';
 import 'package:marcador_de_truco/widgets/win_widget.dart';
 
 class Contador extends StatefulWidget {
-  Contador({Key key, @required this.nameTeam, @required this.quantPontos, @required this.corTeam}) : super(key: key);
+  Contador({Key key, @required this.nameTeam, @required this.quantPontos, @required this.corTeam, this.contadorStream}) : super(key: key);
 
   final String nameTeam;
   final int quantPontos;
   final Color corTeam;
+  final ContadorStream contadorStream;
   @override
   _ContadorState createState() => _ContadorState();
 }
 
 class _ContadorState extends State<Contador> {
-  int value = 0;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -43,7 +44,7 @@ class _ContadorState extends State<Contador> {
               color: Colors.transparent,
               child: Center(
                 child: Text(
-                  value.toString(),
+                  widget.contadorStream.pontos[widget.nameTeam].toString(),
                   style: TextStyle(
                     color: Colors.white,
                     decoration: TextDecoration.none,
@@ -59,8 +60,8 @@ class _ContadorState extends State<Contador> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                buttonContador("+", 1, Colors.white, Colors.green, () => setState(() => value += 1), widget.nameTeam),
-                buttonContador("+", 3, Colors.white, Colors.green, () => setState(() => value += 3), widget.nameTeam),
+                buttonContador("+", 1, Colors.white, Colors.green, widget.contadorStream.countAdd),
+                buttonContador("+", 3, Colors.white, Colors.green, widget.contadorStream.countAdd),
               ],
             ),
             SizedBox(
@@ -69,22 +70,8 @@ class _ContadorState extends State<Contador> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                buttonContador("-", 1, Colors.white, Colors.red, () => setState(() => value > 0 ? value -= 1 : null), widget.nameTeam),
-                buttonContador("-", 3, Colors.white, Colors.red, () {
-                  setState(() {
-                    if (value > 0) {
-                      if (value > 1) {
-                        if (value > 2) {
-                          value -= 3;
-                        } else {
-                          value -= 2;
-                        }
-                      } else {
-                        value -= 1;
-                      }
-                    }
-                  });
-                }, widget.nameTeam),
+                buttonContador("-", 1, Colors.white, Colors.red, widget.contadorStream.countLess),
+                buttonContador("-", 3, Colors.white, Colors.red, widget.contadorStream.countLess),
               ],
             ),
           ],
@@ -93,7 +80,7 @@ class _ContadorState extends State<Contador> {
     );
   }
 
-  Widget buttonContador(String sinal, int valor, Color fontColor, Color backgroundColor, Function fun, String nameTeam) {
+  Widget buttonContador(String sinal, int valor, Color fontColor, Color backgroundColor, Function count) {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.all(3),
@@ -103,7 +90,7 @@ class _ContadorState extends State<Contador> {
               overlayColor: MaterialStateProperty.all(
                 Colors.green[100],
               )),
-          onPressed: fun,
+          onPressed: () => count(valor, widget.nameTeam),
           child: Center(
             child: Text(
               "$sinal" + valor.toString(),
@@ -113,9 +100,5 @@ class _ContadorState extends State<Contador> {
         ),
       ),
     );
-  }
-
-  Future<Widget> winner(nameTeam) async {
-    return showDialog(context: context, builder: (context) => winnerRound(context, nameTeam), barrierDismissible: false, barrierColor: Colors.transparent);
   }
 }
