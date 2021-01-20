@@ -1,3 +1,4 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:marcador_de_truco/widgets/config_partida.dart';
 
@@ -14,45 +15,51 @@ class _HomePageState extends State<HomePage> {
         image: DecorationImage(image: AssetImage('assets/fundo.png'), fit: BoxFit.fill),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 100),
+            padding: EdgeInsets.only(top: 100),
             child: Image.asset(
               'assets/logo.png',
               width: 200,
             ),
           ),
-          FractionallySizedBox(
-            widthFactor: 0.8,
-            child: TextButton(
-              onPressed: () => showDialog(context: context, builder: (context) => configPartida(context), barrierDismissible: false),
-              style: ButtonStyle(
-                overlayColor: MaterialStateProperty.all(Colors.black38),
-                backgroundColor: MaterialStateProperty.all(Colors.red),
+          Column(
+            children: [
+              FractionallySizedBox(
+                widthFactor: 0.8,
+                child: TextButton(
+                  onPressed: () => showDialog(context: context, builder: (context) => configPartida(context), barrierDismissible: false),
+                  style: ButtonStyle(
+                    overlayColor: MaterialStateProperty.all(Colors.black38),
+                    backgroundColor: MaterialStateProperty.all(Colors.red),
+                  ),
+                  child: Text(
+                    'INICIAR',
+                    style: TextStyle(color: Colors.white, fontSize: 30),
+                  ),
+                ),
               ),
-              child: Text(
-                'INICIAR',
-                style: TextStyle(color: Colors.white, fontSize: 30),
+              SizedBox(
+                height: 10,
               ),
-            ),
+              FractionallySizedBox(
+                widthFactor: 0.8,
+                child: TextButton(
+                  onPressed: () {},
+                  style: ButtonStyle(
+                    overlayColor: MaterialStateProperty.all(Colors.black38),
+                    backgroundColor: MaterialStateProperty.all(Colors.red),
+                  ),
+                  child: Text(
+                    'HISTÓRICO',
+                    style: TextStyle(color: Colors.white, fontSize: 30),
+                  ),
+                ),
+              ),
+            ],
           ),
-          SizedBox(
-            height: 20,
-          ),
-          FractionallySizedBox(
-            widthFactor: 0.8,
-            child: TextButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                overlayColor: MaterialStateProperty.all(Colors.black38),
-                backgroundColor: MaterialStateProperty.all(Colors.red),
-              ),
-              child: Text(
-                'HISTÓRICO',
-                style: TextStyle(color: Colors.white, fontSize: 30),
-              ),
-            ),
-          ),
+          AdmobBanner(adUnitId: 'ca-app-pub-5225090572765616/9741816970', adSize: AdmobBannerSize.FULL_BANNER),
         ],
       ),
     );

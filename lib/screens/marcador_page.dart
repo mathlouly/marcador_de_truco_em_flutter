@@ -1,3 +1,4 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:marcador_de_truco/widgets/contador.dart';
 
@@ -5,20 +6,18 @@ class MarcadorPage extends StatelessWidget {
   final int quantPontos;
   final String nameTeamOne;
   final String nameTeamTwo;
+
   MarcadorPage(this.quantPontos, this.nameTeamOne, this.nameTeamTwo);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.grey[900],
-      //decoration: BoxDecoration(
-      //  image: DecorationImage(image: AssetImage('assets/fundo.png'), fit: BoxFit.fill),
-      //),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 100, bottom: 50),
+            padding: EdgeInsets.only(top: 100),
             child: FractionallySizedBox(
               widthFactor: 0.7,
               child: Container(
@@ -60,6 +59,7 @@ class MarcadorPage extends StatelessWidget {
               ],
             ),
           ),
+          AdmobBanner(adUnitId: 'ca-app-pub-5225090572765616/9741816970', adSize: AdmobBannerSize.FULL_BANNER),
         ],
       ),
     );

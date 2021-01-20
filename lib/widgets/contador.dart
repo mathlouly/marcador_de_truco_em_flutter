@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marcador_de_truco/widgets/win_widget.dart';
 
 class Contador extends StatefulWidget {
   Contador({Key key, @required this.nameTeam, @required this.quantPontos, @required this.corTeam}) : super(key: key);
@@ -58,8 +59,8 @@ class _ContadorState extends State<Contador> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                buttonContador("+", 1, Colors.white, Colors.green, () => setState(() => value += 1)),
-                buttonContador("+", 3, Colors.white, Colors.green, () => setState(() => value += 3)),
+                buttonContador("+", 1, Colors.white, Colors.green, () => setState(() => value += 1), widget.nameTeam),
+                buttonContador("+", 3, Colors.white, Colors.green, () => setState(() => value += 3), widget.nameTeam),
               ],
             ),
             SizedBox(
@@ -68,7 +69,7 @@ class _ContadorState extends State<Contador> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                buttonContador("-", 1, Colors.white, Colors.red, () => setState(() => value > 0 ? value -= 1 : null)),
+                buttonContador("-", 1, Colors.white, Colors.red, () => setState(() => value > 0 ? value -= 1 : null), widget.nameTeam),
                 buttonContador("-", 3, Colors.white, Colors.red, () {
                   setState(() {
                     if (value > 0) {
@@ -83,7 +84,7 @@ class _ContadorState extends State<Contador> {
                       }
                     }
                   });
-                }),
+                }, widget.nameTeam),
               ],
             ),
           ],
@@ -92,7 +93,7 @@ class _ContadorState extends State<Contador> {
     );
   }
 
-  Widget buttonContador(String sinal, int valor, Color fontColor, Color backgroundColor, Function fun) {
+  Widget buttonContador(String sinal, int valor, Color fontColor, Color backgroundColor, Function fun, String nameTeam) {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.all(3),
@@ -112,5 +113,9 @@ class _ContadorState extends State<Contador> {
         ),
       ),
     );
+  }
+
+  Future<Widget> winner(nameTeam) async {
+    return showDialog(context: context, builder: (context) => winnerRound(context, nameTeam), barrierDismissible: false, barrierColor: Colors.transparent);
   }
 }

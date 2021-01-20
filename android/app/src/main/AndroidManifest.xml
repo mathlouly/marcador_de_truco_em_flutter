@@ -1,8 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="louly.software.marcador_de_truco">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="marcador_de_truco"
+        android:label="Marcador de Truco Goianoa"
         android:icon="@mipmap/ic_launcher">
+        <meta-data
+          android:name="com.google.android.gms.ads.APPLICATION_ID"
+          android:value="ca-app-pub-5225090572765616~4141812419"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -17,10 +21,6 @@
             <meta-data
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
-              />
-            <meta-data
-              android:name="com.google.android.gms.ads.APPLICATION_ID"
-              android:value="ca-app-pub-5348250812176353~6850616675"
               />
             <!-- Displays an Android View that continues showing the launch screen
                  Drawable until Flutter paints its first frame, then this splash

@@ -69,9 +69,7 @@ Widget configPartida(BuildContext context) {
                     style: TextStyle(fontSize: 15, color: Colors.black),
                     maxLength: 3,
                     controller: numberRound,
-                    onTap: () {
-                      print(MediaQuery.of(context).viewInsets.bottom);
-                    },
+                    onTap: () {},
                     onChanged: (newValue) {
                       for (int i = 0; i < notSymbols.length; i++) {
                         if (newValue.contains(notSymbols[i])) {
@@ -102,7 +100,6 @@ Widget configPartida(BuildContext context) {
                 onPressed: () {
                   if (numberRound.text.length > 0 && teamOne.text.length > 0 && teamTwo.text.length > 0)
                     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => MarcadorPage(int.parse(numberRound.text), teamOne.text, teamTwo.text)), (route) => false);
-                  //Navigator.of(context).push(MaterialPageRoute(builder: (context) => MarcadorPage(int.parse(numberRound.text), teamOne.text, teamTwo.text)));
                 },
               ),
               SizedBox(
