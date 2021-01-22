@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:marcador_de_truco/stream/contador_stream.dart';
-import 'package:marcador_de_truco/widgets/win_widget.dart';
 
-class Contador extends StatefulWidget {
-  Contador({Key key, @required this.nameTeam, @required this.quantPontos, @required this.corTeam, this.contadorStream}) : super(key: key);
+class WidgetContador extends StatefulWidget {
+  WidgetContador({Key key, @required this.nameTeam, @required this.quantPontos, @required this.corTeam, this.contadorStream}) : super(key: key);
 
   final String nameTeam;
   final int quantPontos;
   final Color corTeam;
   final ContadorStream contadorStream;
   @override
-  _ContadorState createState() => _ContadorState();
+  _WidgetContadorState createState() => _WidgetContadorState();
 }
 
-class _ContadorState extends State<Contador> {
+class _WidgetContadorState extends State<WidgetContador> {
   @override
   Widget build(BuildContext context) {
     return Expanded(

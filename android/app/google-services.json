@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1051545533636",
+    "project_id": "marcadordetrucogoiano",
+    "storage_bucket": "marcadordetrucogoiano.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051545533636:android:ef217a9f1855cbafe95d91",
+        "android_client_info": {
+          "package_name": "louly.software.marcador_de_truco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1051545533636-uovghbrf6dv7g5hpht3sr9ib369ed19o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQpeZSTpJz14YIvS3lYOVQlpoQdqtvggs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1051545533636-uovghbrf6dv7g5hpht3sr9ib369ed19o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -9,6 +9,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  AdmobBanner banner;
+  bool isShow = true;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -60,7 +68,19 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          AdmobBanner(adUnitId: env['CaAppPub'], adSize: AdmobBannerSize.FULL_BANNER),
+          isShow
+              ? AdmobBanner(
+                  adUnitId: env['CaAppPub'],
+                  adSize: AdmobBannerSize.FULL_BANNER,
+                  listener: (AdmobAdEvent event, Map<String, dynamic> args) {
+                    //event == AdmobAdEvent.failedToLoad ? setState(() => isShow = false) : print('carregou');
+                    print(event);
+                  },
+                )
+              : Container(
+                  color: Colors.black,
+                  child: Text('Not load admob'),
+                ),
         ],
       ),
     );
