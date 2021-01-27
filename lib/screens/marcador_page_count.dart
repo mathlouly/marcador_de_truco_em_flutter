@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:marcador_de_truco/stream/contador_stream.dart';
 import 'package:marcador_de_truco/widgets/widget_contador.dart';
+import 'package:wakelock/wakelock.dart';
 
 Widget marcadorPageCount(String nameTeamOne, String nameTeamTwo, int quantPontos, ContadorStream _contadorStream) {
+  Wakelock.toggle(enable: true);
   return Column(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [

@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:marcador_de_truco/screens/home_page.dart';
 import 'package:marcador_de_truco/screens/marcador_page.dart';
+import 'package:wakelock/wakelock.dart';
 /*
  * Pagina após ter ganhado a partida
  */
 
 Widget marcadorPageWinner(String nameTeamWinner, context, nameTeamOne, nameTeamTwo, quantPontos, ptsTeamOne, ptsTeamTwo, db) {
+  Wakelock.toggle(enable: false);
   String dataPartida = "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year} ${DateTime.now().hour}:${DateTime.now().minute}";
   db.writeDatabase(nameTeamWinner, nameTeamOne, nameTeamTwo, ptsTeamOne, ptsTeamTwo, dataPartida);
   return Stack(
