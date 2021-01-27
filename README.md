@@ -8,7 +8,7 @@ Esse projeto foi criado utilizando flutter. É um projeto simples para quem est�
  
  
 ###### Link para baixar o aplicativo
-- [App Google Play](#)
+- [App Google Play](https://play.google.com/store/apps/details?id=louly.software.marcador_de_truco)
 
 ###### Video de criação (explicativo)
 - [Video de como criar](#)
