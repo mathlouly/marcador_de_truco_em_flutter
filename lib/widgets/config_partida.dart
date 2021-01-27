@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marcador_de_truco/screens/marcador_page.dart';
 
-Widget configPartida(BuildContext context) {
+Widget configPartida(BuildContext context, db) {
   TextEditingController teamOne = TextEditingController();
   TextEditingController teamTwo = TextEditingController();
   TextEditingController numberRound = TextEditingController();
@@ -67,7 +67,7 @@ Widget configPartida(BuildContext context) {
                 child: Center(
                   child: TextFormField(
                     style: TextStyle(fontSize: 15, color: Colors.black),
-                    maxLength: 3,
+                    maxLength: 2,
                     controller: numberRound,
                     onTap: () {},
                     onChanged: (newValue) {
@@ -80,7 +80,7 @@ Widget configPartida(BuildContext context) {
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       labelText: 'Quantidade de pontos',
-                      fillColor: Colors.orange,
+                      fillColor: Colors.blue,
                     ),
                   ),
                 ),
@@ -93,14 +93,23 @@ Widget configPartida(BuildContext context) {
                   overlayColor: MaterialStateProperty.all(Colors.black38),
                   backgroundColor: MaterialStateProperty.all(Colors.red),
                 ),
-                child: Text(
-                  'Começar',
-                  style: TextStyle(color: Colors.white, fontSize: 25),
+                child: Center(
+                  child: Text(
+                    'COMEÇAR',
+                    style: TextStyle(color: Colors.white, fontSize: 25),
+                  ),
                 ),
                 onPressed: () {
-                  if (numberRound.text.length > 0 && teamOne.text.length > 0 && teamTwo.text.length > 0)
+                  if (numberRound.text.length > 0 && numberRound.text.length <= 99 && teamOne.text.length > 0 && teamOne.text.length <= 10 && teamTwo.text.length > 0 && teamTwo.text.length <= 10)
                     Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => MarcadorPage(quantPontos: int.parse(numberRound.text), nameTeamOne: teamOne.text, nameTeamTwo: teamTwo.text)), (route) => false);
+                        MaterialPageRoute(
+                            builder: (context) => MarcadorPage(
+                                  quantPontos: int.parse(numberRound.text),
+                                  nameTeamOne: teamOne.text,
+                                  nameTeamTwo: teamTwo.text,
+                                  db: db,
+                                )),
+                        (route) => false);
                 },
               ),
               SizedBox(
@@ -108,17 +117,13 @@ Widget configPartida(BuildContext context) {
               ),
               TextButton(
                 style: ButtonStyle(
-                  overlayColor: MaterialStateProperty.all(Colors.black38),
-                  backgroundColor: MaterialStateProperty.all(Colors.white),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.zero,
-                      side: BorderSide(
-                        color: Colors.black,
-                      ))),
+                  side: MaterialStateProperty.all(BorderSide(color: Colors.black)),
                 ),
-                child: Text(
-                  'Cancelar',
-                  style: TextStyle(color: Colors.black, fontSize: 25),
+                child: Center(
+                  child: Text(
+                    'CANCELAR',
+                    style: TextStyle(color: Colors.black, fontSize: 25),
+                  ),
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
