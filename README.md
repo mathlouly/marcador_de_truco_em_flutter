@@ -2,7 +2,7 @@
 
 Projeto para marcar pontos no truco utilizando Flutter
 
-<img src="https://hnet.com/video-to-gif/viewimage/20210212-12-neLSjyNIadstij8f-QkZMkm-HNET"/>
+<img src="https://im4.ezgif.com/tmp/ezgif-4-3f8f6e283824.gif" border="0" width="300"/>
 
 ## Começando
 
