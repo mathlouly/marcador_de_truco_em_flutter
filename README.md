@@ -2,6 +2,8 @@
 
 Projeto para marcar pontos no truco utilizando Flutter
 
+<img src="https://hnet.com/video-to-gif/download/20210212-12-neLSjyNIadstij8f-QkZMkm/Hnet-image.gif"/>
+
 ## Começando
 
 Esse projeto foi criado utilizando flutter. É um projeto simples para quem está começando a aprender porém é de grande valia no seu conhecimento
