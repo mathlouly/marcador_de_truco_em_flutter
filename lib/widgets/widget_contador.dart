@@ -1,8 +1,16 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:marcador_de_truco/stream/contador_stream.dart';
 
 class WidgetContador extends StatefulWidget {
-  WidgetContador({Key key, @required this.nameTeam, @required this.quantPontos, @required this.corTeam, this.contadorStream}) : super(key: key);
+  WidgetContador({
+    Key? key,
+    required this.nameTeam,
+    required this.quantPontos,
+    required this.corTeam,
+    required this.contadorStream,
+  }) : super(key: key);
 
   final String nameTeam;
   final int quantPontos;
@@ -18,7 +26,7 @@ class _WidgetContadorState extends State<WidgetContador> {
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.grey[800].withOpacity(0.3),
+          color: Colors.grey[800]?.withOpacity(0.3),
         ),
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
         margin: EdgeInsets.symmetric(horizontal: 5),

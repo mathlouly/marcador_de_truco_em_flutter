@@ -1,13 +1,13 @@
 import 'dart:async';
 
 class ContadorStream {
+  ContadorStream(this.quantPontos);
+
   Map pontos = {};
-  int quantPontos;
-  String nameTeamWinner;
+  int? quantPontos;
+  String? nameTeamWinner;
   bool isWinner = false;
   final StreamController controller = StreamController<int>.broadcast();
-
-  ContadorStream(this.quantPontos);
 
   addTeams(List<String> teams) {
     for (var i = 0; i < teams.length; i++) {

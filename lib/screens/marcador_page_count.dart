@@ -19,7 +19,7 @@ Widget marcadorPageCount(String nameTeamOne, String nameTeamTwo, int quantPontos
               color: Colors.red,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.red[900],
+                  color: Colors.red[900] ?? Colors.red,
                   blurRadius: 5,
                   spreadRadius: 0.5,
                   offset: Offset(0, 0),
@@ -55,7 +55,7 @@ Widget marcadorPageCount(String nameTeamOne, String nameTeamTwo, int quantPontos
           ],
         ),
       ),
-      AdmobBanner(adUnitId: env['CaAppPub'], adSize: AdmobBannerSize.FULL_BANNER),
+      AdmobBanner(adUnitId: dotenv.get('CaAppPub'), adSize: AdmobBannerSize.FULL_BANNER),
     ],
   );
 }

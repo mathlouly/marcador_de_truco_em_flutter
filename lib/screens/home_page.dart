@@ -1,14 +1,18 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:marcador_de_truco/screens/historico_page.dart';
-import 'package:marcador_de_truco/database/init_database.dart';
-import 'package:marcador_de_truco/widgets/config_partida.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({Key key, this.db}) : super(key: key);
+import 'package:marcador_de_truco/database/init_database.dart';
+import 'package:marcador_de_truco/screens/historico_page.dart';
+import 'package:marcador_de_truco/widgets/config_partida.dart';
 
+class HomePage extends StatefulWidget {
   final DatabaseInit db;
+  const HomePage({
+    Key? key,
+    required this.db,
+  }) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -35,7 +39,10 @@ class _HomePageState extends State<HomePage> {
               FractionallySizedBox(
                 widthFactor: 0.8,
                 child: TextButton(
-                  onPressed: () => showDialog(context: context, builder: (context) => configPartida(context, widget.db), barrierDismissible: false),
+                  onPressed: () => showDialog(
+                      context: context,
+                      builder: (context) => configPartida(context, widget.db),
+                      barrierDismissible: false),
                   style: ButtonStyle(
                     overlayColor: MaterialStateProperty.all(Colors.black38),
                     backgroundColor: MaterialStateProperty.all(Colors.red),
@@ -52,7 +59,8 @@ class _HomePageState extends State<HomePage> {
               FractionallySizedBox(
                 widthFactor: 0.8,
                 child: TextButton(
-                  onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => HistoricoPage(widget.db))),
+                  onPressed: () =>
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => HistoricoPage(widget.db))),
                   style: ButtonStyle(
                     overlayColor: MaterialStateProperty.all(Colors.black38),
                     backgroundColor: MaterialStateProperty.all(Colors.red),
@@ -66,7 +74,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           AdmobBanner(
-            adUnitId: env['CaAppPub'],
+            adUnitId: dotenv.get('CaAppPub'),
             adSize: AdmobBannerSize.FULL_BANNER,
           )
         ],

@@ -9,11 +9,11 @@ class HistoricoPage extends StatelessWidget {
     return FutureBuilder(
       future: db.readDatabase(),
       builder: (context, snapshot) {
-        List<Map> list = List.from(snapshot.data.reversed);
+        List<Map> list = List.from(snapshot.data!.reversed);
         return Scaffold(
           backgroundColor: Colors.grey[900],
           appBar: AppBar(
-            backgroundColor: Colors.grey[800].withOpacity(0.7),
+            backgroundColor: Colors.grey[800]?.withOpacity(0.7),
             title: Text(
               "HISTÓRICO",
               style: TextStyle(fontSize: 25),
@@ -29,9 +29,11 @@ class HistoricoPage extends StatelessWidget {
                     return Container(
                       child: Card(
                         margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                        shadowColor: list[lenHistorico]['teamWinner'] == list[lenHistorico]['teamOne'] ? Colors.greenAccent : Colors.redAccent,
+                        shadowColor: list[lenHistorico]['teamWinner'] == list[lenHistorico]['teamOne']
+                            ? Colors.greenAccent
+                            : Colors.redAccent,
                         elevation: 1,
-                        color: Colors.grey[800].withOpacity(0.3),
+                        color: Colors.grey[800]?.withOpacity(0.3),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -39,7 +41,9 @@ class HistoricoPage extends StatelessWidget {
                               widthFactor: 1,
                               child: Container(
                                 alignment: Alignment.center,
-                                color: list[lenHistorico]['teamWinner'] == list[lenHistorico]['teamOne'] ? Colors.green[800] : Colors.red[800],
+                                color: list[lenHistorico]['teamWinner'] == list[lenHistorico]['teamOne']
+                                    ? Colors.green[800]
+                                    : Colors.red[800],
                                 padding: EdgeInsets.symmetric(vertical: 10),
                                 child: Text(
                                   "Vencedor: ${list[lenHistorico]['teamWinner']}",
@@ -62,7 +66,8 @@ class HistoricoPage extends StatelessWidget {
                                       SizedBox(height: 10),
                                       Text(
                                         "${list[lenHistorico]['ptsTeamOne']}",
-                                        style: TextStyle(fontSize: 27, color: Colors.white, fontWeight: FontWeight.bold),
+                                        style:
+                                            TextStyle(fontSize: 27, color: Colors.white, fontWeight: FontWeight.bold),
                                       ),
                                     ],
                                   ),
@@ -76,7 +81,8 @@ class HistoricoPage extends StatelessWidget {
                                       SizedBox(height: 10),
                                       Text(
                                         "${list[lenHistorico]['ptsTeamTwo']}",
-                                        style: TextStyle(fontSize: 27, color: Colors.white, fontWeight: FontWeight.bold),
+                                        style:
+                                            TextStyle(fontSize: 27, color: Colors.white, fontWeight: FontWeight.bold),
                                       ),
                                     ],
                                   ),
@@ -86,7 +92,9 @@ class HistoricoPage extends StatelessWidget {
                             Container(
                               alignment: Alignment.center,
                               padding: EdgeInsets.symmetric(vertical: 5),
-                              color: list[lenHistorico]['teamWinner'] == list[lenHistorico]['teamOne'] ? Colors.green[800].withOpacity(0.5) : Colors.red[800].withOpacity(0.5),
+                              color: list[lenHistorico]['teamWinner'] == list[lenHistorico]['teamOne']
+                                  ? Colors.green[800]?.withOpacity(0.5)
+                                  : Colors.red[800]?.withOpacity(0.5),
                               child: Text(
                                 "Data: $data  Hora: $hora",
                                 style: TextStyle(color: Colors.white, fontSize: 17),

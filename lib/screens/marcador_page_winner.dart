@@ -9,9 +9,11 @@ import 'dart:math';
  * Pagina após ter ganhado a partida
  */
 
-Widget marcadorPageWinner(String nameTeamWinner, context, nameTeamOne, nameTeamTwo, quantPontos, ptsTeamOne, ptsTeamTwo, db) {
+Widget marcadorPageWinner(
+    String nameTeamWinner, context, nameTeamOne, nameTeamTwo, quantPontos, ptsTeamOne, ptsTeamTwo, db) {
   Wakelock.toggle(enable: false);
-  String dataPartida = "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year} ${DateTime.now().hour}:${DateTime.now().minute}";
+  String dataPartida =
+      "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year} ${DateTime.now().hour}:${DateTime.now().minute}";
   db.writeDatabase(nameTeamWinner, nameTeamOne, nameTeamTwo, ptsTeamOne, ptsTeamTwo, dataPartida);
   List<String> desafios = [
     "Vire uma dose de tequila.",
@@ -41,7 +43,8 @@ Widget marcadorPageWinner(String nameTeamWinner, context, nameTeamOne, nameTeamT
             Text(
               "$nameTeamWinner\nVenceu a partida.",
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 32, color: Colors.white, decoration: TextDecoration.none, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 32, color: Colors.white, decoration: TextDecoration.none, fontWeight: FontWeight.bold),
             ),
             SizedBox(
               height: 55,
@@ -52,7 +55,7 @@ Widget marcadorPageWinner(String nameTeamWinner, context, nameTeamOne, nameTeamT
                 overlayColor: MaterialStateProperty.all(Colors.red[50]),
               ),
               onPressed: () {
-                return showDialog(
+                showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
@@ -74,7 +77,11 @@ Widget marcadorPageWinner(String nameTeamWinner, context, nameTeamOne, nameTeamT
                               Text(
                                 desafios[desafioValue],
                                 textAlign: TextAlign.start,
-                                style: TextStyle(fontSize: 25, color: Colors.black, decoration: TextDecoration.none, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.black,
+                                    decoration: TextDecoration.none,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -165,7 +172,7 @@ Widget marcadorPageWinner(String nameTeamWinner, context, nameTeamOne, nameTeamT
       ),
       Positioned(
         bottom: 0,
-        child: AdmobBanner(adUnitId: env['CaAppPub'], adSize: AdmobBannerSize.FULL_BANNER),
+        child: AdmobBanner(adUnitId: dotenv.get('CaAppPub'), adSize: AdmobBannerSize.FULL_BANNER),
       ),
     ],
   );
