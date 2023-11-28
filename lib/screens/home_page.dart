@@ -1,23 +1,40 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:marcador_de_truco/database/init_database.dart';
 import 'package:marcador_de_truco/screens/historico_page.dart';
 import 'package:marcador_de_truco/widgets/config_partida.dart';
 
 class HomePage extends StatefulWidget {
-  final DatabaseInit db;
-  const HomePage({
-    Key? key,
-    required this.db,
-  }) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  final DatabaseInit db = DatabaseInit();
+  BannerAd? _bannerAd;
+
+  void loadAd() {
+    _bannerAd = BannerAd(
+      size: AdSize.fullBanner,
+      adUnitId: dotenv.get('CaAppPub'),
+      listener: BannerAdListener(onAdLoaded: (ad) {
+        setState(() {});
+      }, onAdFailedToLoad: (ad, loadError) {
+        print(loadError.message);
+      }),
+      request: const AdRequest(),
+    )..load();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadAd();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,7 +58,7 @@ class _HomePageState extends State<HomePage> {
                 child: TextButton(
                   onPressed: () => showDialog(
                       context: context,
-                      builder: (context) => configPartida(context, widget.db),
+                      builder: (context) => configPartida(context, db),
                       barrierDismissible: false),
                   style: ButtonStyle(
                     overlayColor: MaterialStateProperty.all(Colors.black38),
@@ -60,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                 widthFactor: 0.8,
                 child: TextButton(
                   onPressed: () =>
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => HistoricoPage(widget.db))),
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => HistoricoPage(db))),
                   style: ButtonStyle(
                     overlayColor: MaterialStateProperty.all(Colors.black38),
                     backgroundColor: MaterialStateProperty.all(Colors.red),
@@ -73,10 +90,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          AdmobBanner(
-            adUnitId: dotenv.get('CaAppPub'),
-            adSize: AdmobBannerSize.FULL_BANNER,
-          )
+          if (_bannerAd != null) AdWidget(ad: _bannerAd!),
         ],
       ),
     );

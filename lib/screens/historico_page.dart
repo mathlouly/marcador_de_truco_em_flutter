@@ -9,11 +9,12 @@ class HistoricoPage extends StatelessWidget {
     return FutureBuilder(
       future: db.readDatabase(),
       builder: (context, snapshot) {
-        List<Map> list = List.from(snapshot.data!.reversed);
+        List<Map> list = snapshot.hasData ? List.from(snapshot.data!.reversed) : [];
+
         return Scaffold(
           backgroundColor: Colors.grey[900],
           appBar: AppBar(
-            backgroundColor: Colors.grey[800]?.withOpacity(0.7),
+            backgroundColor: Colors.white,
             title: Text(
               "HISTÓRICO",
               style: TextStyle(fontSize: 25),
@@ -106,28 +107,30 @@ class HistoricoPage extends StatelessWidget {
                     );
                   },
                 )
-              : Container(
-                  padding: EdgeInsets.all(20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Não encontramos o que você espera",
-                        style: TextStyle(fontSize: 30, color: Colors.white),
-                        textAlign: TextAlign.center,
+              : snapshot.connectionState == ConnectionState.waiting
+                  ? CircularProgressIndicator()
+                  : Container(
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Não encontramos o que você espera",
+                            style: TextStyle(fontSize: 30, color: Colors.white),
+                            textAlign: TextAlign.center,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Icon(
+                            Icons.not_interested,
+                            size: 100,
+                            color: Colors.red,
+                          )
+                        ],
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Icon(
-                        Icons.not_interested,
-                        size: 100,
-                        color: Colors.red,
-                      )
-                    ],
-                  ),
-                ),
+                    ),
         );
       },
     );

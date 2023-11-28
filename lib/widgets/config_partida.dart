@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:marcador_de_truco/data/models/settings_game_model.dart';
+import 'package:marcador_de_truco/providers/marcador_provider.dart';
 import 'package:marcador_de_truco/screens/marcador_page.dart';
+import 'package:provider/provider.dart';
 
 Widget configPartida(BuildContext context, db) {
   TextEditingController teamOne = TextEditingController();
   TextEditingController teamTwo = TextEditingController();
-  TextEditingController numberRound = TextEditingController();
+  TextEditingController maxPoints = TextEditingController();
   List notSymbols = ['-', ' ', '_', '.', ','];
 
   return StatefulBuilder(builder: (context, setState) {
@@ -68,12 +71,12 @@ Widget configPartida(BuildContext context, db) {
                   child: TextFormField(
                     style: TextStyle(fontSize: 15, color: Colors.black),
                     maxLength: 2,
-                    controller: numberRound,
+                    controller: maxPoints,
                     onTap: () {},
                     onChanged: (newValue) {
                       for (int i = 0; i < notSymbols.length; i++) {
                         if (newValue.contains(notSymbols[i])) {
-                          numberRound.text = numberRound.text.replaceAll(notSymbols[i], '');
+                          maxPoints.text = maxPoints.text.replaceAll(notSymbols[i], '');
                         }
                       }
                     },
@@ -88,28 +91,38 @@ Widget configPartida(BuildContext context, db) {
               SizedBox(
                 height: 20,
               ),
-              TextButton(
-                style: ButtonStyle(
-                  overlayColor: MaterialStateProperty.all(Colors.black38),
-                  backgroundColor: MaterialStateProperty.all(Colors.red),
-                ),
-                child: Center(
-                  child: Text(
-                    'COMEÇAR',
-                    style: TextStyle(color: Colors.white, fontSize: 25),
-                  ),
-                ),
-                onPressed: () {
-                  if (numberRound.text.length > 0 && numberRound.text.length <= 99 && teamOne.text.length > 0 && teamOne.text.length <= 10 && teamTwo.text.length > 0 && teamTwo.text.length <= 10)
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                            builder: (context) => MarcadorPage(
-                                  quantPontos: int.parse(numberRound.text),
-                                  nameTeamOne: teamOne.text,
-                                  nameTeamTwo: teamTwo.text,
-                                  db: db,
-                                )),
-                        (route) => false);
+              Consumer<MarcadorProvider>(
+                builder: (ctx, provider, child) {
+                  return TextButton(
+                    style: ButtonStyle(
+                      overlayColor: MaterialStateProperty.all(Colors.black38),
+                      backgroundColor: MaterialStateProperty.all(Colors.red),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'COMEÇAR',
+                        style: TextStyle(color: Colors.white, fontSize: 25),
+                      ),
+                    ),
+                    onPressed: () {
+                      if (maxPoints.text.length > 0 &&
+                          maxPoints.text.length <= 99 &&
+                          teamOne.text.length > 0 &&
+                          teamOne.text.length <= 10 &&
+                          teamTwo.text.length > 0 &&
+                          teamTwo.text.length <= 10) {
+                        provider.configGame(SettingsGameModel(
+                          nameTeamOne: teamOne.text,
+                          nameTeamTwo: teamTwo.text,
+                          maxPoints: int.parse(maxPoints.text),
+                        ));
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (context) => MarcadorPage()),
+                          (route) => false,
+                        );
+                      }
+                    },
+                  );
                 },
               ),
               SizedBox(
